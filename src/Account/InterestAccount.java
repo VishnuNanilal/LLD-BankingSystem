@@ -1,5 +1,7 @@
 package Account;
 
+import User.User;
+
 import java.util.Date;
 
 public abstract class InterestAccount extends Account {
@@ -7,8 +9,8 @@ public abstract class InterestAccount extends Account {
     protected float annualInterestRate;
     protected boolean autoReinvest;
 
-    InterestAccount(AccountType accountType, Date createdDate, int maxTransactionNumbs, int transactionResetPeriod, float annualInterestRate, boolean autoReinvest){
-        super(accountType, createdDate, maxTransactionNumbs, transactionResetPeriod);
+    InterestAccount(User user, AccountType accountType, Date createdDate, int maxTransactionNumbs, int transactionResetPeriod, float annualInterestRate, boolean autoReinvest){
+        super(user, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod);
         this.annualInterestRate=annualInterestRate;
         this.autoReinvest=autoReinvest;
     }

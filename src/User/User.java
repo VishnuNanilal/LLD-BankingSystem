@@ -22,6 +22,8 @@ public class User {
         this.password=password;
     }
 
+    public String getName(){return name;}
+
     public UID getId() {
         return id;
     }

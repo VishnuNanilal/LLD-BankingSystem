@@ -1,10 +1,12 @@
 package Account;
 
+import User.User;
 import java.rmi.server.UID;
 import java.util.Date;
 
 public abstract class Account {
         UID accountId;
+        protected User user;
         protected AccountType accountType;
 //    private Customer customer;
         protected final Date createdDate;
@@ -12,14 +14,20 @@ public abstract class Account {
         protected int maxTransactionNumbs;
         protected int transactionResetPeriod;
 
-        Account(AccountType accountType, Date createdDate, int maxTransactionNumbs, int transactionResetPeriod){
-            this.accountId=new UID();
-            this.accountType=accountType;
-            this.createdDate=createdDate;
-            this.maxTransactionNumbs=maxTransactionNumbs;
-            this.transactionResetPeriod=transactionResetPeriod;
-            this.balance=0;
-        }
+    public Account(User user, AccountType accountType, Date createdDate, int maxTransactionNumbs, int transactionResetPeriod) {
+        this.accountId=new UID();
+        this.user=user;
+        this.accountType=accountType;
+        this.createdDate=createdDate;
+        this.maxTransactionNumbs=maxTransactionNumbs;
+        this.transactionResetPeriod=transactionResetPeriod;
+        this.balance=0;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public AccountType getAccountType() {
         return accountType;
     }
