@@ -2,11 +2,12 @@ package Account;
 
 import User.User;
 
+import java.time.Instant;
 import java.util.Date;
 
 public class Savings extends InterestAccount{
     private double dailyInterestSum=0;
-    Savings(User user, AccountType accountType, Date createdDate, int maxTransactionNumbs, int transactionResetPeriod, float interestRate, boolean autoReinvest) {
+    public Savings(User user, AccountType accountType, Instant createdDate, int maxTransactionNumbs, int transactionResetPeriod, float interestRate, boolean autoReinvest) {
         super(user, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod, interestRate, autoReinvest);
     }
 

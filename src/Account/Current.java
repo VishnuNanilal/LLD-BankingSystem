@@ -2,10 +2,10 @@ package Account;
 
 import User.User;
 
-import java.util.Date;
+import java.time.Instant;
 
 public class Current extends Account{
-    Current(User user, AccountType accountType, Date createdDate, int maxTransactionNumbs, int transactionResetPeriod) {
+    public Current(User user, AccountType accountType, Instant createdDate, int maxTransactionNumbs, int transactionResetPeriod) {
         super(user, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod);
     }
 }

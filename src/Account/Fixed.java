@@ -2,13 +2,14 @@ package Account;
 
 import User.User;
 
+import java.time.Instant;
 import java.util.Date;
 
 public class Fixed extends InterestAccount{
     private int interestCompoundNumbs;
     private int matureYearCount;
-    Fixed(User user, AccountType accountType,
-          Date createdDate,
+    public Fixed(User user, AccountType accountType,
+          Instant createdDate,
           int maxTransactionNumbs,
           int transactionResetPeriod,
           float interestRate,

@@ -1,30 +1,25 @@
 package User;
-import Account.*;
 
-import java.rmi.server.UID;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 public class User {
-    UID id;
+    UUID id;
     protected String name;
     protected String email;
     protected String password;
     protected int age;
 
-    User(String name, String email, String password){
-        id=new UID();
+    User(String name, String email, String password, int age){
+        id= UUID.randomUUID();
         this.name=name;
         this.email= email;
         this.password=password;
+        this.age=age;
     }
 
     public String getName(){return name;}
 
-    public UID getId() {
+    public UUID getId() {
         return id;
     }
 

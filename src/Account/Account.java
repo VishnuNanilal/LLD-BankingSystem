@@ -1,21 +1,22 @@
 package Account;
 
 import User.User;
-import java.rmi.server.UID;
-import java.util.Date;
+import java.time.Instant;
+import java.util.UUID;
+import java.util.UUID.*;
 
 public abstract class Account {
-        UID accountId;
+        UUID accountId;
         protected User user;
         protected AccountType accountType;
 //    private Customer customer;
-        protected final Date createdDate;
+        protected final Instant createdDate;
         protected double balance;
         protected int maxTransactionNumbs;
         protected int transactionResetPeriod;
 
-    public Account(User user, AccountType accountType, Date createdDate, int maxTransactionNumbs, int transactionResetPeriod) {
-        this.accountId=new UID();
+    public Account(User user, AccountType accountType, Instant createdDate, int maxTransactionNumbs, int transactionResetPeriod) {
+        this.accountId= UUID.randomUUID();
         this.user=user;
         this.accountType=accountType;
         this.createdDate=createdDate;
@@ -26,6 +27,10 @@ public abstract class Account {
 
     public User getUser() {
         return user;
+    }
+
+    public UUID getAccountId() {
+        return accountId;
     }
 
     public AccountType getAccountType() {
