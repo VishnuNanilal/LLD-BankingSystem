@@ -1,13 +1,14 @@
 package Account;
 
-import User.User;
+import User.Customer;
+import Utils.Exception.TransactionException;
+
 import java.time.Instant;
 import java.util.UUID;
-import java.util.UUID.*;
 
 public abstract class Account {
         UUID accountId;
-        protected User user;
+        protected Customer user;
         protected AccountType accountType;
 //    private Customer customer;
         protected final Instant createdDate;
@@ -15,7 +16,7 @@ public abstract class Account {
         protected int maxTransactionNumbs;
         protected int transactionResetPeriod;
 
-    public Account(User user, AccountType accountType, Instant createdDate, int maxTransactionNumbs, int transactionResetPeriod) {
+    public Account(Customer user, AccountType accountType, Instant createdDate, int maxTransactionNumbs, int transactionResetPeriod) {
         this.accountId= UUID.randomUUID();
         this.user=user;
         this.accountType=accountType;
@@ -25,7 +26,7 @@ public abstract class Account {
         this.balance=0;
     }
 
-    public User getUser() {
+    public Customer getUser() {
         return user;
     }
 
@@ -44,34 +45,34 @@ public abstract class Account {
         return transactionResetPeriod;
     }
 
-    public synchronized boolean deposit(double amount){
-            if(amount<0)
-                return false;
+    public synchronized boolean deposit(double amount) {
+        try {
+            if (amount < 0) {
+                throw new IllegalArgumentException("Argument cannot be zero");
+            }
 
-            balance+=amount;
+            balance += amount;
             return true;
-        }
-
-    public synchronized boolean withdraw(double amount){
-        if(amount<0)
+        } catch (IllegalArgumentException iae) {
+            iae.printStackTrace();
             return false;
-
-        balance-=amount;
-        return true;
+        }
     }
 
-    public synchronized boolean transfer(double amount, Account otherAccount){
-            boolean success = this.withdraw(amount);
-            if(!success)
-                return false;
-            success = otherAccount.deposit(amount);
-            if(!success)
-            {
-                this.deposit(amount);
-                return false;
+    public synchronized boolean withdraw(double amount){
+        try {
+            if (amount < 0){
+                throw new TransactionException("Insufficient funds");
             }
+
+            balance -= amount;
             return true;
         }
+        catch(TransactionException te){
+            te.printStackTrace();
+            return false;
+        }
+    }
 
     public double checkBalance(){
             return balance;

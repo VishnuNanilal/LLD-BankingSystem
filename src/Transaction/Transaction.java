@@ -6,8 +6,8 @@ public class Transaction {
     TransactionType type;
     Account currAccount;
     Account otherAccount;
-    float amount;
-    Transaction(TransactionType type, Account currAccount, Account otherAccount, float amount){
+    double amount;
+    public Transaction(TransactionType type, Account currAccount, Account otherAccount, double amount){
         this.type=type;
         this.currAccount=currAccount;
         this.otherAccount=otherAccount;
@@ -26,7 +26,7 @@ public class Transaction {
         return otherAccount;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 }

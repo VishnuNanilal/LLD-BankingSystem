@@ -11,10 +11,16 @@ import java.util.stream.Collectors;
 public class Customer extends User {
     Map<UUID, Account> accounts;
     Queue<Transaction> transactions = new LinkedList<>();
-    Set<INotification> notificationModes = new HashSet<>();
+    Set<INotification> notificationModes;
     public Customer(String name, String email, String password, int age) {
         super(name, email, password, age);
         accounts=new HashMap<UUID, Account>();
+        addDefaultNotificationModes();
+    }
+
+    private void addDefaultNotificationModes(){
+        notificationModes.add(new SMS());
+        notificationModes.add(new Email());
     }
     public boolean addAccount(Account account){
         if(checkAccountExists(account.getAccountId())){

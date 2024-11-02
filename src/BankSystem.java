@@ -1,7 +1,9 @@
 import Account.*;
 import Account.AccountType;
+import Transaction.*;
 import User.Customer;
 import User.User;
+import Utils.Exception.TransactionException;
 
 import java.time.Instant;
 import java.util.*;
@@ -50,6 +52,28 @@ public class BankSystem {
         return customers.get(customerId).removeAccount(accountId);
     }
 
-
+    public boolean makeTransaction(double amount, Account senderAccount, Account receiverAccount){
+        try {
+            if (amount < 0) {
+                throw new TransactionException("Amount cannot be zero");
+            }
+            boolean success = senderAccount.withdraw(amount);
+            if (!success)
+                return false;
+            success = receiverAccount.deposit(amount);
+            if (!success) {
+                senderAccount.deposit(amount);
+                return false;
+            }
+            Customer sender = senderAccount.getUser();
+            sender.addTransaction(new Transaction(TransactionType.DEBIT, senderAccount, receiverAccount, amount));
+            Customer receiver = senderAccount.getUser();
+            receiver.addTransaction(new Transaction(TransactionType.CREDIT, receiverAccount, senderAccount, amount));
+            return true;
+        }
+        catch(TransactionException te){
+            te.printStackTrace();
+            return false;
+        }
+    }
 }
-
