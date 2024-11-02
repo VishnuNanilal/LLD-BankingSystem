@@ -76,4 +76,11 @@ public class BankSystem {
             return false;
         }
     }
+
+    public List<Transaction> filterTransactionByAmount(Customer customer, double amount){
+        return customer.filterTransactionByAmount(amount);
+    }
+    public List<Transaction> filterTransactionByOtherAccount(Customer customer, Account otherAccount){
+        return customer.filterTransactionByOtherAccount(otherAccount);
+    }
 }

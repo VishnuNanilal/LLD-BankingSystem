@@ -2,11 +2,11 @@ package User;
 import Account.Account;
 import Transaction.*;
 import Utils.*;
+import Utils.Filter.FilterTransactionByOtherAccount;
+import Utils.Filter.FilterTransactionByAmount;
 import Utils.SMS;
 
-import java.rmi.server.UID;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Customer extends User {
     Map<UUID, Account> accounts;
@@ -99,5 +99,15 @@ public class Customer extends User {
             return notificationModes.remove(new Fax());
         }
         return false;
+    }
+
+    public List<Transaction> filterTransactionByAmount(double amount){
+        FilterTransactionByAmount filter = new FilterTransactionByAmount(amount);
+        return filter.filter(new ArrayList<Transaction>(transactions));
+    }
+
+    public List<Transaction> filterTransactionByOtherAccount(Account otherAccount){
+        FilterTransactionByOtherAccount filter = new FilterTransactionByOtherAccount(otherAccount.getAccountId());
+        return filter.filter(new ArrayList<Transaction>(transactions));
     }
 }

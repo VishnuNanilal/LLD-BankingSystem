@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FilterTransactionByAmount implements FilterTransaction{
-    float lowerLimit, upperLimit;
-    FilterTransactionByAmount(float amount){
+    double lowerLimit, upperLimit;
+    public FilterTransactionByAmount(double amount){
         this.lowerLimit=amount;
         this.upperLimit=amount;
     }
-    FilterTransactionByAmount(float lowerLimit, float upperLimit){
+    FilterTransactionByAmount(double lowerLimit, double upperLimit){
         this.lowerLimit= lowerLimit;
         this.upperLimit=upperLimit;
     }
