@@ -1,6 +1,6 @@
 package Account;
 
-import User.User;
+import User.*;
 
 import java.time.Instant;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.Date;
 public class Fixed extends InterestAccount{
     private int interestCompoundNumbs;
     private int matureYearCount;
-    public Fixed(User user, AccountType accountType,
+    public Fixed(Customer customer, AccountType accountType,
           Instant createdDate,
           int maxTransactionNumbs,
           int transactionResetPeriod,
@@ -16,7 +16,7 @@ public class Fixed extends InterestAccount{
           boolean autoReinvest,
           int interestCompoundNumbs,
           int matureYearCount){
-        super(user, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod, interestRate, autoReinvest);
+        super(customer, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod, interestRate, autoReinvest);
         this.interestCompoundNumbs=interestCompoundNumbs;
         this.matureYearCount=matureYearCount;
     }

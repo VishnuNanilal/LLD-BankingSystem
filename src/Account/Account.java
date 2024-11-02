@@ -77,4 +77,7 @@ public abstract class Account {
     public double checkBalance(){
             return balance;
     }
+    public String toString(){
+        return "Account type: "+accountType+" held by user: "+user.getName()+" created on: "+createdDate;
+    }
 }

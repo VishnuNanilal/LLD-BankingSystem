@@ -30,7 +30,7 @@ public class BankSystem {
     public boolean checkCustomer(UUID id){
         return customers.containsKey(id);
     }
-    public boolean addAccountToCustomer(UUID customerId, User user, AccountType accountType, Instant createdDate, int maxTransactionNumbs, int transactionResetPeriod,
+    public boolean addAccountToCustomer(UUID customerId, AccountType accountType, Instant createdDate, int maxTransactionNumbs, int transactionResetPeriod,
                                         float interestRate, boolean autoReinvest, int interestCompoundNumbs, int matureYearCount) {
         if(!checkCustomer(customerId))
             return false;
@@ -39,11 +39,11 @@ public class BankSystem {
         Account newAccount=null;
         switch(accountType) {
             case CURRENT:
-                newAccount = new Current(user, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod);
+                newAccount = new Current(customer, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod);
             case FIXED:
-                newAccount = new Fixed(user, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod, interestRate, autoReinvest, interestCompoundNumbs, matureYearCount);
+                newAccount = new Fixed(customer, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod, interestRate, autoReinvest, interestCompoundNumbs, matureYearCount);
             case SAVINGS:
-                newAccount = new Savings(user, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod, interestRate, autoReinvest);
+                newAccount = new Savings(customer, accountType, createdDate, maxTransactionNumbs, transactionResetPeriod, interestRate, autoReinvest);
         }
         return customer.addAccount(newAccount);
     }

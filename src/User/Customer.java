@@ -10,11 +10,13 @@ import java.util.*;
 
 public class Customer extends User {
     Map<UUID, Account> accounts;
-    Queue<Transaction> transactions = new LinkedList<>();
+    Queue<Transaction> transactions;
     Set<INotification> notificationModes;
     public Customer(String name, String email, String password, int age) {
         super(name, email, password, age);
         accounts=new HashMap<UUID, Account>();
+        transactions = new LinkedList<Transaction>();
+        notificationModes = new HashSet<>();
         addDefaultNotificationModes();
     }
 
@@ -54,6 +56,7 @@ public class Customer extends User {
             System.err.println("Customer doesn't contain Account");
             return null;
         }
+        System.out.println("Account found, fetching...");
         return accounts.get(id);
     }
 
